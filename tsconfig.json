@@ -1,0 +1,14 @@
+{
+  "include": ["src/*.ts"],
+  "exclude": ["node_modules/*", "__sapper__/*", "build/*"],
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": true,
+    "noImplicitAny": false,
+    "outDir": "build",
+    "lib": [
+      "dom",
+      "es5"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+
+<div id="ko-calculator-tw-seller" style="display: none;" data-bind="visible: true">
+    <h3>Potential Income: <span data-bind="text: income"></span></h3>
+    <div data-bind="foreach: tradelines">
+        <div>
+            <label for="type">Card Type</label>
+            <select id="type" data-bind="options: []"></select>
+        </div>
+        <div>
+            <label for="limit">Limit</label>
+            <input
+                    id="limit"
+                    type="range"
+                    min="2000"
+                    max="100000"
+                    step="1000"
+                    data-bind="value: limit, valueUpdate: 'input'"
+            />
+            <div data-bind="text: displayLimit"></div>
+        </div>
+        <div>
+            <label for="age">Age</label>
+            <input
+                    id="age"
+                    type="range"
+                    min="2"
+                    max="30"
+                    step=".5"
+                    data-bind="value: age, valueUpdate: 'input'"
+            />
+            <div><span data-bind="text: age"></span> years</div>
+        </div>
+        <div>
+            <label for="paymentHistory">Has Perfect Payment History</label>
+            <input
+                    id="paymentHistory"
+                    type="checkbox"
+                    data-bind="checked: perfectPaymentHistory"
+            />
+        </div>
+        <button data-bind="click: $parent.removeTradeline">Remove</button>
+    </div>
+    <button data-bind="click: addTradeline">Add tradeline</button>
+</div>
