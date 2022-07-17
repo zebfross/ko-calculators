@@ -10,11 +10,13 @@
   "devDependencies": {
     "jsdom": "^20.0.0",
     "jsdom-global": "^3.0.2",
+    "jsmin": "^1.0.1",
     "knockout": "^3.5.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "build": "tsc & jsmin --overwrite build/tw-seller-calculator.js"
   },
   "author": "",
   "license": "ISC"
