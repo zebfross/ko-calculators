@@ -1,22 +1,21 @@
 
 <div id="ko-calculator-tw-seller" style="display: none;" data-bind="visible: true">
-    <h3>Potential Income: <span data-bind="text: income"></span></h3>
     <div data-bind="foreach: tradelines">
         <div>
             <label for="type">Card Type</label>
-            <select id="type" data-bind="options: []"></select>
+            <select id="type" data-bind="options: $parent.cardNames, value:type"></select>
         </div>
         <div>
             <label for="limit">Limit</label>
             <input
                     id="limit"
                     type="range"
-                    min="2000"
-                    max="100000"
+                    min="0"
+                    max="70000"
                     step="1000"
                     data-bind="value: limit, valueUpdate: 'input'"
             />
-            <div data-bind="text: displayLimit"></div>
+            <div class="value-label" data-bind="text: displayLimit"></div>
         </div>
         <div>
             <label for="age">Age</label>
@@ -28,7 +27,17 @@
                     step=".5"
                     data-bind="value: age, valueUpdate: 'input'"
             />
-            <div><span data-bind="text: age"></span> years</div>
+            <div><span class="value-label" data-bind="text: age"></span> years</div>
+        </div>
+        <div>
+            <label for="age">Available Spots</label>
+            <input
+                    id="spots"
+                    type="range"
+                    min="0"
+                    data-bind="value: spots, valueUpdate: 'input', attr: {max: maxSpots}"
+            />
+            <div><span class="value-label" data-bind="text: spots"></span> available spots</div>
         </div>
         <div>
             <label for="paymentHistory">Has Perfect Payment History</label>
@@ -38,7 +47,15 @@
                     data-bind="checked: perfectPaymentHistory"
             />
         </div>
-        <button data-bind="click: $parent.removeTradeline">Remove</button>
+        <p class="tradeline-income">
+            This Tradeline's Potential Income: $<span data-bind="text: income"></span>/mo
+
+            <br data-bind="if: comments" /><span class="comments" data-bind="text: comments"></span>
+            <button class="wpforms-submit" data-bind="click: $parent.removeTradeline">Remove</button>
+        </p>
     </div>
-    <button data-bind="click: addTradeline">Add tradeline</button>
+    <button class="wpforms-submit" data-bind="click: addTradeline, text: buttonText">Add a Tradeline</button>
+    <p>
+    <h3 class="total-income-container">Total Potential Income: <span class="total-income-amount" data-bind="text: income"></span>/mo</h3>
+    </p>
 </div>
