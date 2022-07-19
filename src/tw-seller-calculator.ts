@@ -16,7 +16,7 @@ class TradelineModel {
     maxSpots: KnockoutComputed<number>;
 
     incomeForRate(this: TradelineModel, rate: number) {
-        if (!this.perfectPaymentHistory() || this.limit() < 3000)
+        if (!this.perfectPaymentHistory() || this.limit() < 3000 || this.age() < 2)
             return 0;
         return (Math.max(275, (this.limit() * 0.015 + this.age() * 25)) * rate) * this.spots();
     }
@@ -24,6 +24,7 @@ class TradelineModel {
     comments: KnockoutComputed<string>;
 
     income: KnockoutComputed<number>;
+    incomeTwenty: KnockoutComputed<number>;
 
     constructor(app=null, type="", limit=5000, age=5, perfectPaymentHistory=true) {
         this.app = app;
@@ -55,12 +56,19 @@ class TradelineModel {
             return this.incomeForRate(0.4);
         });
 
+        this.incomeTwenty = ko.computed(() => {
+            return this.incomeForRate(0.20);
+        });
+
         this.comments = ko.computed(() => {
             if (!this.perfectPaymentHistory())
                 return "We only accept cards with perfect payment history.";
 
             if (this.limit() < 3000)
                 return "We only accept cards with a limit of $3000 or more.";
+
+            if (this.age() < 2)
+                return "We only accept cards with an age of more than 2 years.";
 
             return "";
         });
@@ -87,6 +95,7 @@ class AppViewModel {
     }
 
     income: KnockoutComputed<string>;
+    incomeTwenty: KnockoutComputed<string>;
 
     cardTypes = {
         "Chase": 2,
@@ -117,6 +126,9 @@ class AppViewModel {
         var _this = this;
         this.income = ko.computed(() => {
             return this.incomeForRate(0.4);
+        });
+        this.incomeTwenty = ko.computed(() => {
+            return this.incomeForRate(0.2);
         });
 
         this.removeTradeline = function (this: TradelineModel) {
