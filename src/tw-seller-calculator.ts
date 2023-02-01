@@ -24,7 +24,6 @@ class TradelineModel {
     comments: KnockoutComputed<string>;
 
     income: KnockoutComputed<number>;
-    incomeTwenty: KnockoutComputed<number>;
 
     constructor(app=null, type="", limit=5000, age=5, perfectPaymentHistory=true) {
         this.app = app;
@@ -53,11 +52,7 @@ class TradelineModel {
         })
 
         this.income = ko.computed(() => {
-            return this.incomeForRate(0.4);
-        });
-
-        this.incomeTwenty = ko.computed(() => {
-            return this.incomeForRate(0.20);
+            return this.incomeForRate(0.25);
         });
 
         this.comments = ko.computed(() => {
@@ -95,7 +90,6 @@ class AppViewModel {
     }
 
     income: KnockoutComputed<string>;
-    incomeTwenty: KnockoutComputed<string>;
 
     cardTypes = {
         "Chase": 2,
@@ -125,10 +119,7 @@ class AppViewModel {
     constructor() {
         var _this = this;
         this.income = ko.computed(() => {
-            return this.incomeForRate(0.4);
-        });
-        this.incomeTwenty = ko.computed(() => {
-            return this.incomeForRate(0.2);
+            return this.incomeForRate(0.25);
         });
 
         this.removeTradeline = function (this: TradelineModel) {
