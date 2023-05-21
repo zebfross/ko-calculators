@@ -38,8 +38,9 @@ function ko_calculator_shortcode($atts) {
         return '<p>Calculator not found.</p>';
     }
 
+    $path = ROOT_DIR . "/build/$id-calculator.js";
     $src = plugins_url("build/$id-calculator.js", __FILE__);
-    wp_enqueue_script("ko-calculators-$id", $src, ['knockout-js'], filemtime($src), true);
+    wp_enqueue_script("ko-calculators-$id", $src, ['knockout-js'], filemtime($path), true);
 
     ob_start();
     $theme = ROOT_DIR . "/views/$id-calculator.html";
